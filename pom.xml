@@ -9,6 +9,7 @@
     <version>1.0-SNAPSHOT</version>
     <modules>
         <module>notification-broker</module>
+        <module>notification-configuration</module>
     </modules>
     <packaging>pom</packaging>
     <name>notification-project</name>
