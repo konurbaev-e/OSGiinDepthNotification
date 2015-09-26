@@ -28,7 +28,7 @@ public class NotificationConfiguringClient implements BundleActivator {
 
         Dictionary<String, Object> configProperties = new Hashtable<String, Object>();
 
-        configProperties.put("port", 10);
+        configProperties.put("port", 8081);
 
         ServiceReference [] serviceReferences =
                 bundleContext.getServiceReferences(MetaTypeProvider.class.getName(),"(" + Constants.SERVICE_PID + "=" + "org.konurbaev.notification.broker" + ")");
