@@ -84,7 +84,7 @@
                 <extensions>true</extensions>
                 <configuration>
                     <instructions>
-                        <Bundle-Activator>${bundle.namespace}.NotificationBrokerActivator</Bundle-Activator>
+                        <Bundle-Activator>${bundle.namespace}.NotificationBrokerFactoryActivator</Bundle-Activator>
                     </instructions>
                 </configuration>
             </plugin>

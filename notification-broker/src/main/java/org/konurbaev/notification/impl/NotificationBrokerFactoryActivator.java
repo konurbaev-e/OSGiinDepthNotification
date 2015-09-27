@@ -14,8 +14,7 @@ import org.osgi.service.cm.ManagedServiceFactory;
 
 import org.konurbaev.notification.NotificationBroker;
 
-public class NotificationBrokerFactoryActivator
-        implements BundleActivator, ManagedServiceFactory {
+public class NotificationBrokerFactoryActivator implements BundleActivator, ManagedServiceFactory {
 
     private ServiceRegistration registration;
     private BundleContext context;
@@ -41,6 +40,9 @@ public class NotificationBrokerFactoryActivator
     @SuppressWarnings("rawtypes")
     public synchronized void updated(String pid, Dictionary configuration)
             throws ConfigurationException {
+
+        System.out.println("PID " + pid + " is being updated");
+
         Integer port = (Integer) configuration.get("port");
 
         if (port == null) {

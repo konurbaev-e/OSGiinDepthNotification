@@ -84,7 +84,7 @@
                 <extensions>true</extensions>
                 <configuration>
                     <instructions>
-                        <Bundle-Activator>${bundle.namespace}.NotificationConfiguringClient</Bundle-Activator>
+                        <Bundle-Activator>${bundle.namespace}.NotificationConfiguringFactoryClient</Bundle-Activator>
                     </instructions>
                 </configuration>
             </plugin>
