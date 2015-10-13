@@ -10,6 +10,7 @@
     <modules>
         <module>notification-broker</module>
         <module>notification-configuration</module>
+        <module>notification-logreader</module>
     </modules>
     <packaging>pom</packaging>
     <name>notification-project</name>

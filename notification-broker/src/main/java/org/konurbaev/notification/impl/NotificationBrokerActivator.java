@@ -179,8 +179,7 @@ public class NotificationBrokerActivator implements BundleActivator,
         return null;
     }
 
-    public ObjectClassDefinition getObjectClassDefinition(String pid,
-                                                          String locale) {
+    public ObjectClassDefinition getObjectClassDefinition(String pid, String locale) {
 
         if (configurationSchema.getID().equals(pid)) {
             return configurationSchema;
