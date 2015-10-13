@@ -17,11 +17,9 @@ public class StdoutLogReaderActivator implements BundleActivator, LogListener {
 
     @SuppressWarnings("unchecked")
     public void start(BundleContext context) throws Exception {
-        ServiceReference serviceReference =
-                context.getServiceReference(LogReaderService.class.getName());
+        ServiceReference serviceReference = context.getServiceReference(LogReaderService.class.getName());
 
-        LogReaderService logReader =
-                (LogReaderService) context.getService(serviceReference);
+        LogReaderService logReader = (LogReaderService) context.getService(serviceReference);
 
         logReader.addLogListener(this);
 
@@ -31,8 +29,7 @@ public class StdoutLogReaderActivator implements BundleActivator, LogListener {
         while (logs.hasMoreElements()) {
             entry = logs.nextElement();
 
-            System.out.println(entry.getBundle().getSymbolicName() + ": "
-                    + entry.getMessage());
+            System.out.println(entry.getBundle().getSymbolicName() + ": " + entry.getMessage());
         }
     }
 
@@ -40,8 +37,7 @@ public class StdoutLogReaderActivator implements BundleActivator, LogListener {
         System.out.println("log entry = " + entry.getMessage());
 
         if (entry.getException() instanceof ConfigurationException) {
-            ConfigurationException configExcep =
-                    (ConfigurationException) entry.getException();
+            ConfigurationException configExcep = (ConfigurationException) entry.getException();
 
             System.out.println("config exception = " + configExcep.getMessage());
 //            

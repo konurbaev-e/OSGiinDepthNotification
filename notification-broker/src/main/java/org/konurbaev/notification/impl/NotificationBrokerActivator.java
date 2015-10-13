@@ -17,8 +17,7 @@ import org.osgi.service.metatype.ObjectClassDefinition;
 
 import org.konurbaev.notification.NotificationBroker;
 
-public class NotificationBrokerActivator implements BundleActivator,
-        ManagedService, MetaTypeProvider {
+public class NotificationBrokerActivator implements BundleActivator, ManagedService, MetaTypeProvider {
 
     private ObjectClassDefinition configurationSchema;
     private ServiceRegistration registration;
