@@ -45,6 +45,12 @@
             <scope>provided</scope>
         </dependency>
 
+        <!--logger-->
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-api</artifactId>
+            <scope>provided</scope>
+        </dependency>
 
         <!-- Test Dependencies -->
         <dependency>

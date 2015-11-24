@@ -16,9 +16,12 @@ import org.osgi.service.metatype.MetaTypeProvider;
 import org.osgi.service.metatype.ObjectClassDefinition;
 
 import org.konurbaev.notification.NotificationBroker;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class NotificationBrokerActivator implements BundleActivator, ManagedService, MetaTypeProvider {
 
+    private final static Logger logger = LoggerFactory.getLogger(NotificationBrokerActivator.class);
     private ObjectClassDefinition configurationSchema;
     private ServiceRegistration registration;
     private BundleContext context;
@@ -28,15 +31,15 @@ public class NotificationBrokerActivator implements BundleActivator, ManagedServ
     public void start(BundleContext bundleContext) throws Exception {
         this.context = bundleContext;
 
-        System.out.println("starting notification broker");
+        logger.debug("starting notification broker");
 
         initializeSchema();
 
-        Dictionary<String, Object> properties = new Hashtable<String, Object>();
+        Dictionary<String, Object> properties = new Hashtable<>();
 
         properties.put(Constants.SERVICE_PID, "org.konurbaev.notification.broker");
 
-        System.out.println("register 1");
+        logger.debug("register 1");
 
         registration = bundleContext.registerService(
                 new String [] {
@@ -52,11 +55,11 @@ public class NotificationBrokerActivator implements BundleActivator, ManagedServ
     private void initializeSchema() {
         configurationSchema = new ObjectClassDefinition() {
 
-            AttributeDefinition [] requiredAttrs =
+            final AttributeDefinition [] requiredAttrs =
                     new AttributeDefinition [] {
                             new AttributeDefinition() {
 
-                                String [] defaultValues = new String[] {"8080"};
+                                final String [] defaultValues = new String[] {"8080"};
 
                                 public int getCardinality() {
                                     return 0;
@@ -91,7 +94,7 @@ public class NotificationBrokerActivator implements BundleActivator, ManagedServ
                                 }
 
                                 public String validate(String value) {
-                                    Integer portValue = null;
+                                    Integer portValue;
 
                                     try {
                                         portValue = Integer.valueOf(value);

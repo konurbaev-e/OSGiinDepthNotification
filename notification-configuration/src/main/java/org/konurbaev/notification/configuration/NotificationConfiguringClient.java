@@ -26,7 +26,7 @@ public class NotificationConfiguringClient implements BundleActivator {
          */
         Configuration configuration = configAdmin.getConfiguration("org.konurbaev.notification.broker", null);
 
-        Dictionary<String, Object> configProperties = new Hashtable<String, Object>();
+        Dictionary<String, Object> configProperties = new Hashtable<>();
 
         configProperties.put("port", 8081);
 

@@ -150,6 +150,14 @@
                 <version>1.9_1</version>
             </dependency>
 
+            <!--logger-->
+
+            <dependency>
+                <groupId>org.slf4j</groupId>
+                <artifactId>slf4j-api</artifactId>
+                <version>1.7.13</version>
+            </dependency>
+
             <!-- Test Dependencies -->
             <dependency>
                 <groupId>org.testng</groupId>

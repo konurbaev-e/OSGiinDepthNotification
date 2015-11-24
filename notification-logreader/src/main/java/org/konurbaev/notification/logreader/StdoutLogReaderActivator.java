@@ -9,8 +9,12 @@ import org.osgi.service.cm.ConfigurationException;
 import org.osgi.service.log.LogEntry;
 import org.osgi.service.log.LogListener;
 import org.osgi.service.log.LogReaderService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class StdoutLogReaderActivator implements BundleActivator, LogListener {
+
+    private final static Logger logger = LoggerFactory.getLogger(StdoutLogReaderActivator.class);
 
     public void stop(BundleContext arg0) throws Exception {
     }
@@ -23,23 +27,23 @@ public class StdoutLogReaderActivator implements BundleActivator, LogListener {
 
         logReader.addLogListener(this);
 
-        LogEntry entry = null;
+        LogEntry entry;
         Enumeration<LogEntry> logs = logReader.getLog();
 
         while (logs.hasMoreElements()) {
             entry = logs.nextElement();
 
-            System.out.println(entry.getBundle().getSymbolicName() + ": " + entry.getMessage());
+            logger.debug(entry.getBundle().getSymbolicName() + ": " + entry.getMessage());
         }
     }
 
     public void logged(LogEntry entry) {
-        System.out.println("log entry = " + entry.getMessage());
+        logger.debug("log entry = " + entry.getMessage());
 
         if (entry.getException() instanceof ConfigurationException) {
             ConfigurationException configExcep = (ConfigurationException) entry.getException();
 
-            System.out.println("config exception = " + configExcep.getMessage());
+            logger.debug("config exception = " + configExcep.getMessage());
 //            
 //            
 //            if (configExcep.getProperty().equals("port")) {

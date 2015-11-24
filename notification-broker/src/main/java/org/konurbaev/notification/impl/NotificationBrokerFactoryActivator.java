@@ -13,20 +13,23 @@ import org.osgi.service.cm.ConfigurationException;
 import org.osgi.service.cm.ManagedServiceFactory;
 
 import org.konurbaev.notification.NotificationBroker;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class NotificationBrokerFactoryActivator implements BundleActivator, ManagedServiceFactory {
 
+    private final static Logger logger = LoggerFactory.getLogger(NotificationBrokerFactoryActivator.class);
     private ServiceRegistration registration;
     private BundleContext context;
-    private Map<String, NotificationBrokerImpl> brokers = new HashMap<String, NotificationBrokerImpl>();
-    private Map<String, ServiceRegistration> brokerRegistrations = new HashMap<String, ServiceRegistration>();
+    private final Map<String, NotificationBrokerImpl> brokers = new HashMap<>();
+    private final Map<String, ServiceRegistration> brokerRegistrations = new HashMap<>();
 
     public void start(BundleContext bundleContext) throws Exception {
         this.context = bundleContext;
 
-        System.out.println("starting notification broker");
+        logger.debug("starting notification broker");
 
-        Dictionary<String, Object> properties = new Hashtable<String, Object>();
+        Dictionary<String, Object> properties = new Hashtable<>();
 
         properties.put(Constants.SERVICE_PID, "org.konurbaev.notification.broker");
 
@@ -41,7 +44,7 @@ public class NotificationBrokerFactoryActivator implements BundleActivator, Mana
     public synchronized void updated(String pid, Dictionary configuration)
             throws ConfigurationException {
 
-        System.out.println("PID " + pid + " is being updated");
+        logger.debug("PID " + pid + " is being updated");
 
         Integer port = (Integer) configuration.get("port");
 
