@@ -1,5 +1,6 @@
 package org.konurbaev.notification.configuration;
 
+import java.util.Arrays;
 import java.util.Dictionary;
 import java.util.Hashtable;
 
@@ -39,17 +40,10 @@ public class NotificationConfiguringClient implements BundleActivator {
 
         AttributeDefinition [] attrDefs = ocd.getAttributeDefinitions(ObjectClassDefinition.ALL);
 
-        for (AttributeDefinition attrDef : attrDefs) {
-            Object configPropertyValue = configProperties.get(attrDef.getName());
-
-            if (configPropertyValue != null) {
-                String validationMessage = attrDef.validate(configPropertyValue.toString());
-
-                if (!validationMessage.equals("")) {
-                    throw new IllegalArgumentException(validationMessage);
-                }
-            }
-        }
+        Arrays.stream(attrDefs).filter(attrDef -> (configProperties.get(attrDef.getName()) != null)) //check attr definition name
+                .filter(attrDef -> attrDef.validate(configProperties.get(attrDef.getName()).toString()).equals("")) //check validation message against attr definition
+                .findFirst() //find first empty validation message
+                .ifPresent(attrDef -> new IllegalArgumentException(attrDef.validate(configProperties.get(attrDef.getName()).toString()))); //if present then exception
 
         configuration.update(configProperties);
 
